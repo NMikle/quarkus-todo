@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  rest:
+    image: quarkus-rest-todo-jvm
+    ports:
+      - "8080:8080"
+      - "5005:5005"
+    environment:
+      JAVA_ENABLE_DEBUG: "true"
+    depends_on:
+      - db
+  db:
+    image: postgres
+    ports:
+      - "1234:5432"
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: "root"
+      POSTGRES_DB: todos

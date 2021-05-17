@@ -7,7 +7,7 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.jvm -t quarkus/quarkus-rest-todo-jvm .
+# docker build -f src/main/docker/Dockerfile.jvm -t quarkus-rest-todo-jvm .
 #
 # Then run the container using:
 #
