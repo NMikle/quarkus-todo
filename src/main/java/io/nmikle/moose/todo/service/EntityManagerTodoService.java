@@ -6,7 +6,7 @@ import io.nmikle.moose.todo.model.TodoEntity;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityNotFoundException;
+import javax.persistence.PersistenceException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
 import java.util.Collection;
@@ -52,8 +52,8 @@ public class EntityManagerTodoService implements TodoService {
     @Override
     public Optional<TodoDto> findById(Long id) {
         try {
-            return Optional.of(toDto(entityManager.find(TodoEntity.class, id)));
-        } catch (EntityNotFoundException e) {
+            return Optional.ofNullable(entityManager.find(TodoEntity.class, id)).map(this::toDto);
+        } catch (PersistenceException e) {
             return Optional.empty();
         }
     }
